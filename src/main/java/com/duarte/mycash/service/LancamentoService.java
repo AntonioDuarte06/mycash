@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.duarte.mycash.domain.Lancamento;
@@ -16,9 +18,9 @@ public class LancamentoService {
     @Autowired
     private LancamentoRepository repository;
 
-    public List<Lancamento> todos(){
+    public Page<Lancamento> todos(Pageable pageable){
 
-        return repository.findAll();
+        return repository.findAll(pageable);
     }
 
     public Lancamento apenasUm(Integer id) {
