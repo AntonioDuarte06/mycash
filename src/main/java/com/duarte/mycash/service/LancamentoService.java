@@ -41,8 +41,7 @@ public class LancamentoService {
             lancamento.setTipo(novoLancamento.getTipo());
 
             return repository.save(lancamento);
-        })
-                .orElseThrow(() -> new EntityNotFoundException());
+        }).orElseThrow(() -> new EntityNotFoundException());
     }
 
     public void excluir(Integer id) {
