@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
@@ -27,6 +29,9 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     private UsuarioRole role;
+
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
     public Integer getId() {
         return id;

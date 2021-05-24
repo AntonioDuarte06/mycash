@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.duarte.mycash.domain.Usuario;
@@ -18,13 +19,16 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void registraUsuarioAdmin(String email, String senha) {
 
         if (repo.findByEmail(email).isEmpty()) {
 
             Usuario usuario = new Usuario();
             usuario.setEmail(email);
-            usuario.setSenha(senha);
+            usuario.setSenha(passwordEncoder.encode(senha));
             usuario.setRole(UsuarioRole.ROLE_ADMIN);
 
             repo.save(usuario);
@@ -48,7 +52,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
 
         usuario.setEmail(email);
-        usuario.setSenha(senha);
+        usuario.setSenha(passwordEncoder.encode(senha));
         usuario.setRole(UsuarioRole.ROLE_USER);
 
         return repo.save(usuario);
@@ -62,7 +66,7 @@ public class UsuarioService {
 
     public Usuario resetarSenha(String email, String senha) {
         Usuario usuario = findByEmail(email);
-        usuario.setSenha(senha);
+        usuario.setSenha(passwordEncoder.encode(senha));
 
         return repo.save(usuario);
     }
