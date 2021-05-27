@@ -17,8 +17,8 @@ public class MyCashApplication {
 		UsuarioService service = context.getBean(UsuarioService.class);
 
 		//Criando usuario somente para teste (depois ficará no banco)
-		service.registraUsuarioAdmin("admin@mycash.com.br", "admin");
-		service.save("user@mycash.com.br", "user");
+		service.registraUsuarioAdmin("admin@mycash.com", "admin");
+		service.save("user@mycash.com", "user");
 	}
 
 	@Bean
